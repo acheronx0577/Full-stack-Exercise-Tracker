@@ -1,46 +1,196 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Exercise Tracker | freeCodeCamp</title>
-    <link rel="shortcut icon" href="https://cdn.freecodecamp.org/universal/favicons/favicon.ico"  type="image/x-icon" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css" />
-    <link href="style.css" rel="stylesheet" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="shortcut icon" href="https://cdn.freecodecamp.org/universal/favicons/favicon.ico" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>EXERCISE_TRACKER</title>
   </head>
-
   <body>
-    <div class="container">
-      <h1>Exercise tracker</h1>
-      <form action="/api/users" method="post">
-        <h2>Create a New User</h2>
-        <p><code>POST /api/users</code></p>
-        <input id="uname" type="text" name="username" placeholder="username" />
-        <input type="submit" value="Submit" />
-      </form>
-      <form action="/api/users/:_id/exercises" id="exercise-form" method="post">
-        <h2>Add exercises</h2>
-        <p><code>POST /api/users/:_id/exercises</code></p>
-        <input id="uid" type="text" name=":_id" placeholder=":_id" />
-        <input id="desc" type="text" name="description" placeholder="description*" />
-        <input id="dur" type="text" name="duration" placeholder="duration* (mins.)" />
-        <input id="date" type="text" name="date" placeholder="date (yyyy-mm-dd)" />
-        <input type="submit" value="Submit" />
-      </form>
-      <p>
-        <strong>GET user's exercise log: </strong>
-        <code>GET /api/users/:_id/logs?[from][&amp;to][&amp;limit]</code>
-      </p>
-      <p><strong>[ ]</strong> = optional</p>
-      <p><strong>from, to</strong> = dates (yyyy-mm-dd); <strong>limit</strong> = number</p>
+    <div class="terminal">
+      <header class="terminal-header">
+        <div class="window-controls">
+          <span class="control close"></span>
+          <span class="control minimize"></span>
+          <span class="control maximize"></span>
+        </div>
+        <div class="title-bar">
+          <span class="prompt">></span>
+          <span class="title">EXERCISE_TRACKER</span>
+          <span class="cursor">_</span>
+        </div>
+      </header>
+
+      <main class="terminal-body">
+        <div class="app-header">
+          <h1 class="app-title">~/fitness/exercise_tracker</h1>
+          <div class="status-bar">
+            <span class="status-item">API_READY</span>
+            <span class="status-item">v2.0.0</span>
+            <span class="status-item">UTF-8</span>
+          </div>
+        </div>
+
+        <div class="input-section">
+          <div class="input-group">
+            <label class="input-label">
+              <span class="label-text">CREATE_USER</span>
+              <span class="label-desc">[POST /api/users]</span>
+            </label>
+            <form id="user-form" class="terminal-form">
+              <input
+                type="text"
+                id="username"
+                class="terminal-input"
+                name="username"
+                placeholder="username"
+                required
+              />
+              <button type="submit" class="terminal-btn primary">
+                <span class="btn-text">[CREATE_USER]</span>
+              </button>
+            </form>
+          </div>
+
+          <div class="input-group">
+            <label class="input-label">
+              <span class="label-text">ADD_EXERCISE</span>
+              <span class="label-desc">[POST /api/users/:_id/exercises]</span>
+            </label>
+            <form id="exercise-form" class="terminal-form">
+              <input
+                type="text"
+                id="uid"
+                class="terminal-input"
+                name=":_id"
+                placeholder="user_id"
+                required
+              />
+              <input
+                type="text"
+                id="desc"
+                class="terminal-input"
+                name="description"
+                placeholder="description*"
+                required
+              />
+              <input
+                type="number"
+                id="dur"
+                class="terminal-input"
+                name="duration"
+                placeholder="duration* (mins)"
+                min="1"
+                required
+              />
+              <input
+                type="date"
+                id="date"
+                class="terminal-input"
+                name="date"
+                placeholder="date (yyyy-mm-dd)"
+              />
+              <button type="submit" class="terminal-btn primary">
+                <span class="btn-text">[ADD_EXERCISE]</span>
+              </button>
+            </form>
+          </div>
+
+          <div class="input-group">
+            <label class="input-label">
+              <span class="label-text">GET_EXERCISE_LOG</span>
+              <span class="label-desc">[GET /api/users/:_id/logs?[from][&to][&limit]]</span>
+            </label>
+            <form id="log-form" class="terminal-form">
+              <input
+                type="text"
+                id="log-uid"
+                class="terminal-input"
+                name=":_id"
+                placeholder="user_id"
+                required
+              />
+              <div class="form-row">
+                <input
+                  type="date"
+                  id="from"
+                  class="terminal-input"
+                  name="from"
+                  placeholder="from (yyyy-mm-dd)"
+                />
+                <input
+                  type="date"
+                  id="to"
+                  class="terminal-input"
+                  name="to"
+                  placeholder="to (yyyy-mm-dd)"
+                />
+                <input
+                  type="number"
+                  id="limit"
+                  class="terminal-input"
+                  name="limit"
+                  placeholder="limit"
+                  min="1"
+                />
+              </div>
+              <button type="submit" class="terminal-btn">
+                <span class="btn-text">[GET_LOGS]</span>
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div id="output" class="output-panel hide">
+          <div class="output-header">
+            <span class="output-title">API_RESPONSE</span>
+            <span class="output-status">READY</span>
+          </div>
+          <div class="output-content">
+            <pre id="result" class="result-content"></pre>
+          </div>
+        </div>
+
+        <div class="info-panel">
+          <div class="info-header">
+            <span class="info-title">API_ENDPOINTS</span>
+          </div>
+          <div class="info-content">
+            <div class="endpoint-list">
+              <div class="endpoint-item">
+                <span class="endpoint-method">POST</span>
+                <span class="endpoint-path">/api/users</span>
+                <span class="endpoint-desc">Create new user</span>
+              </div>
+              <div class="endpoint-item">
+                <span class="endpoint-method">POST</span>
+                <span class="endpoint-path">/api/users/:_id/exercises</span>
+                <span class="endpoint-desc">Add exercise</span>
+              </div>
+              <div class="endpoint-item">
+                <span class="endpoint-method">GET</span>
+                <span class="endpoint-path">/api/users/:_id/logs</span>
+                <span class="endpoint-desc">Get exercise log</span>
+              </div>
+            </div>
+            <div class="api-notes">
+              <p><strong>Optional parameters:</strong> [from, to, limit]</p>
+              <p><strong>Date format:</strong> yyyy-mm-dd</p>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="terminal-footer">
+        <div class="footer-stats">
+          <span class="stat">STATUS: READY</span>
+          <span class="stat">ENDPOINTS: 3</span>
+          <span class="stat">MODE: DEVELOPMENT</span>
+        </div>
+      </footer>
     </div>
-    <script>
-      const exerciseForm = document.getElementById("exercise-form");
-
-      exerciseForm.addEventListener("submit", () => {
-        const userId = document.getElementById("uid").value;
-        exerciseForm.action = `/api/users/${userId}/exercises`;
-
-        exerciseForm.submit();
-      });
-    </script>
+    <script src="./script.js"></script>
   </body>
 </html>
