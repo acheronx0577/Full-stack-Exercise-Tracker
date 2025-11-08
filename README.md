@@ -47,7 +47,7 @@ This repository contains one of the portfolio projects needed to demonstrate bac
 
 1. Clone the repository:
    ```
-   git clone git@github.com:acheronx0577/Full-stack-URL-Shortener-Microservice.git
+   git clone git@github.com:acheronx0577/Full-Stack-Exercise-Tracker.git
    ```
    ```
    cd Full-Stack-Exercise-Tracker
